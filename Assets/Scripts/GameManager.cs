@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Camera movement script that sits on the Main camera")]
     public CameraMovement cameraMovement;
     public InputManager inputManager;
+    public RoadManager roadManager;
 
     private void Start() {
         inputManager.OnMouseClick += HandleMouseClick;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     private void HandleMouseClick(Vector3Int position)
     {
         Debug.Log(position);
+        roadManager.PlaceRoad(position);
     }
 
     private void Update()
