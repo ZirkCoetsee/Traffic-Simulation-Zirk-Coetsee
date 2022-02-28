@@ -36,7 +36,7 @@ public class RoadFixer : MonoBehaviour
         {
             CreateThreeWay(placementManager, result, temporaryPosition);
 
-        }else if(roadCount == 4)
+        }else
         {
             CreateFourWay(placementManager, result, temporaryPosition);
         }
@@ -120,6 +120,7 @@ public class RoadFixer : MonoBehaviour
     // [Left, up, right, down]
     private void CreateDeadEnd(PlacementManager placementManager, CellType[] result, Vector3Int temporaryPosition)
     {
+        Debug.Log("Creating Dead End");
         // [up]
         if (result[1] == CellType.Road)
         {
