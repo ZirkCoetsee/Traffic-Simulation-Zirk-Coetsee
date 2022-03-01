@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    // Delegates for buttons
     public Action OnRoadPlacement, OnHousePlacement, OnSpecialPlacement;
     public Button placeRoadButton, placeHouseButton, placeSpecialButton;
 

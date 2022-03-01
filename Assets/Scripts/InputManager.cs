@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     //Deligates for Mouse click events
     public Action<Vector3Int> OnMouseClick, OnMouseHold;
-    public Action OnMouseUp;
+    public Action OnMouseUp, OnEscape;
     public LayerMask groundMask;
 
     //Property for camera movement 
@@ -91,5 +91,13 @@ public class InputManager : MonoBehaviour
                     OnMouseClick?.Invoke(position.Value);
                 }
             }
+    }
+
+    private void CheckEscClick()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnEscape.Invoke();
+        }
     }
 }

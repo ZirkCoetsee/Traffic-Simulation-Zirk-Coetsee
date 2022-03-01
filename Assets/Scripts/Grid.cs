@@ -81,8 +81,11 @@ public class Grid
 
     private List<Point> _roadList = new List<Point>();
     private List<Point> _specialStructure = new List<Point>();
+    private List<Point> _houseStructure = new List<Point>();
 
 
+
+    // Adding index operator to our Grid class so that we can use grid[][] to access specific cell from our grid. 
     public CellType this[int i, int j]
     {
         get
@@ -94,17 +97,16 @@ public class Grid
             if (value == CellType.Road)
             {
                 _roadList.Add(new Point(i, j));
-            }else{
-                _roadList.Remove(new Point(i, j));
-
             }
             if (value == CellType.SpecialStructure)
             {
                 _specialStructure.Add(new Point(i, j));
-            }else{
-                _specialStructure.Remove(new Point(i, j));
-                
             }
+            if (value == CellType.Structure)
+            {
+                _houseStructure.Add(new Point(i, j));
+            }
+            _grid[i, j] = value;
             _grid[i, j] = value;
         }
     }
@@ -128,14 +130,39 @@ public class Grid
 
     public Point GetRandomRoadPoint()
     {
-        Random rand = new Random();
-        return _roadList[rand.Next(0, _roadList.Count - 1)];
+        if (_roadList.Count == 0)
+        {
+            return null;
+        }
+        return _roadList[UnityEngine.Random.Range(0, _roadList.Count)];
     }
 
     public Point GetRandomSpecialStructurePoint()
     {
-        Random rand = new Random();
-        return _roadList[rand.Next(0, _roadList.Count - 1)];
+        if (_specialStructure.Count == 0)
+        {
+            return null;
+        }
+        return _specialStructure[UnityEngine.Random.Range(0, _specialStructure.Count)];
+    }
+
+    public Point GetRandomHouseStructurePoint()
+    {
+        if (_houseStructure.Count == 0)
+        {
+            return null;
+        }
+        return _houseStructure[UnityEngine.Random.Range(0, _houseStructure.Count)];
+    }
+
+    public List<Point> GetAllHouses()
+    {
+        return _houseStructure;
+    }
+
+    internal List<Point> GetAllSpecialStructure()
+    {
+        return _specialStructure;
     }
 
 
