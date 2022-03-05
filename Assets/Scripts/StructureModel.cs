@@ -5,10 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructureModel : MonoBehaviour
+public class StructureModel : MonoBehaviour, IRequireRoad
 {
     // Parent of game object so we need the height
     float yHeight = 0;
+
+    public Vector3Int RoadPosition {get; set;}
 
     public void CreateModel(GameObject model)
     {

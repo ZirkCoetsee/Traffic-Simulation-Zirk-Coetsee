@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
         // Important to have a EventSystem object in current scene!
             if( Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false)
             {
-                OnMouseClick?.Invoke(mainCamera.ScreenPointToRay(Input.mousePosition));
+                OnMouseHold?.Invoke(mainCamera.ScreenPointToRay(Input.mousePosition));
             }
     }
 

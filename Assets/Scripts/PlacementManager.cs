@@ -46,9 +46,10 @@ public class PlacementManager : MonoBehaviour
     {
         StructureModel structure = CreateANewStructureModel(position, structurePrefab, type);
 
-        var structureNeedingRoad = structure.GetComponent<INeedingRoad>();
+        var structureNeedingRoad = structure.GetComponent<IRequireRoad>();
         if (structureNeedingRoad != null)
         {
+            // For the nearest position to the road where pedestrians will 'enter'
             structureNeedingRoad.RoadPosition = GetNearestRoad(position, width, height).Value;
             Debug.Log("My nearest road position is: " + structureNeedingRoad.RoadPosition);
         }
