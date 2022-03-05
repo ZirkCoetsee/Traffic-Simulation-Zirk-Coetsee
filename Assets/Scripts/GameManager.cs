@@ -15,28 +15,45 @@ public class GameManager : MonoBehaviour
     public UIController uiController;
     public StructureManager structureManager;
 
+    public ObjectDetector objectDetector;
+
+
+
     private void Start() {
         uiController.OnRoadPlacement += RoadPlacementHandler;
         uiController.OnHousePlacement += HousePlacementHouseHandler;
         uiController.OnSpecialPlacement += SpecialPlacementHandler;
         uiController.OnBigStructurePlacement += BigStructurePlacementHandler;
+        inputManager.OnEscape += HandleEscape;
 
 
 
+    }
 
+    private void HandleEscape()
+    {
+        ClearInputActions();
+        uiController.ResetButtonColor();
     }
 
     private void BigStructurePlacementHandler()
     {
         ClearInputActions();
-        inputManager.OnMouseClick += structureManager.PLaceBigStructure;
-
+        inputManager.OnMouseClick += (pos) =>
+        {
+            ProcessInputAndCall(structureManager.PlaceBigStructure, pos);
+        };
+        inputManager.OnEscape += HandleEscape;
     }
 
     private void SpecialPlacementHandler()
     {
         ClearInputActions();
-        inputManager.OnMouseClick += structureManager.PlaceSpecial;
+        inputManager.OnMouseClick += (pos) =>
+        {
+            ProcessInputAndCall(structureManager.PlaceSpecial, pos);
+        };
+        inputManager.OnEscape += HandleEscape;
         Debug.Log("Place Special");
 
 
@@ -45,24 +62,40 @@ public class GameManager : MonoBehaviour
     private void HousePlacementHouseHandler()
     {
         ClearInputActions();
-        inputManager.OnMouseClick += structureManager.PlaceHouse;
+        inputManager.OnMouseClick += (pos) =>
+        {
+            ProcessInputAndCall(structureManager.PlaceHouse, pos);
+        };
+        inputManager.OnEscape += HandleEscape;
         Debug.Log("PlaceHouse");
 
+    }
+
+    private void ProcessInputAndCall(Action<Vector3Int> callback, Ray ray)
+    {
+        Vector3Int? result = objectDetector.RaycastGround(ray);
+        if (result.HasValue)
+            callback.Invoke(result.Value);
     }
 
     private void RoadPlacementHandler()
     {
         ClearInputActions();
-        inputManager.OnMouseClick += roadManager.PlaceRoad;
-        inputManager.OnMouseHold += roadManager.PlaceRoad;
+        inputManager.OnMouseClick += (pos) =>
+        {
+            ProcessInputAndCall(roadManager.PlaceRoad, pos);
+        };
         inputManager.OnMouseUp += roadManager.FinishPlacingRoad;
+        inputManager.OnMouseHold += (pos) =>
+        {
+            ProcessInputAndCall(roadManager.PlaceRoad, pos);
+        };
+        inputManager.OnEscape += HandleEscape;
     }
 
     private void ClearInputActions()
     {
-        inputManager.OnMouseClick = null;
-        inputManager.OnMouseHold = null;
-        inputManager.OnMouseUp = null;
+        inputManager.ClearEvents();
     }
 
     private void Update()

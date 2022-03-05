@@ -155,6 +155,7 @@ public class Grid
         return _houseStructure[UnityEngine.Random.Range(0, _houseStructure.Count)];
     }
 
+    // Added for spawing pedestrians where houses are
     public List<Point> GetAllHouses()
     {
         return _houseStructure;

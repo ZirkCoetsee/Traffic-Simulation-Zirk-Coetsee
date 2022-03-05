@@ -42,7 +42,7 @@ public class StructureManager : MonoBehaviour
         }
     }
 
-    internal void PLaceBigStructure(Vector3Int position)
+    internal void PlaceBigStructure(Vector3Int position)
     {
         // Dimensions of big structure
         // Can make them dynamic

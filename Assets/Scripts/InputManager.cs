@@ -11,16 +11,11 @@ public class InputManager : MonoBehaviour
     [SerializeField] Camera mainCamera;
 
     //Deligates for Mouse click events
-    public Action<Vector3Int> OnMouseClick, OnMouseHold;
-    public Action OnMouseUp, OnEscape;
-    public LayerMask groundMask;
-
-    //Property for camera movement 
-    private Vector2 cameraMovementVector;
-    public Vector2 CameraMovementVector
-    {
-        get { return cameraMovementVector; }
-    }
+    // Changed actions to be events only, assign and un-assign
+    public event Action<Ray> OnMouseClick, OnMouseHold;
+    public event Action OnMouseUp, OnEscape;
+    private Vector2 mouseMovementVector = Vector2.zero;
+    public Vector2 CameraMovementVector { get => mouseMovementVector; }
 
     private void Update() {
         // Get Inputs from player
@@ -28,28 +23,13 @@ public class InputManager : MonoBehaviour
         CheckClickUpEvent();
         CheckClickHoldEvent();
         CheckArrowInput();
-
-    }
-
-    private Vector3Int? RaycastGround()
-    {
-        // Check if the raycast has hit the ground
-        RaycastHit hit;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
-        {
-            Vector3Int positionInt = Vector3Int.RoundToInt(hit.point);
-            return positionInt;
-        }
-
-        return null;
-
+        CheckEscClick();
     }
 
     private void CheckArrowInput()
     {
         // Get arrows or WASD keys
-        cameraMovementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        mouseMovementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     private void CheckClickHoldEvent()
@@ -60,14 +40,7 @@ public class InputManager : MonoBehaviour
         // Important to have a EventSystem object in current scene!
             if( Input.GetMouseButton(0) && EventSystem.current.IsPointerOverGameObject() == false)
             {
-                // Debug.Log("Mouse Button Hold");
-
-                var position = RaycastGround();
-                if(position != null){
-                    // Notify any listeners that the mouse has been moved
-                    // ? Allows us to avoid exception where nothing is listening  
-                    OnMouseHold?.Invoke(position.Value);
-                }
+                OnMouseClick?.Invoke(mainCamera.ScreenPointToRay(Input.mousePosition));
             }
     }
 
@@ -85,11 +58,7 @@ public class InputManager : MonoBehaviour
     {
             if( Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
             {
-                // Debug.Log("Mouse Button Down");
-                var position = RaycastGround();
-                if(position != null){
-                    OnMouseClick?.Invoke(position.Value);
-                }
+                OnMouseClick?.Invoke(mainCamera.ScreenPointToRay(Input.mousePosition)); 
             }
     }
 
@@ -99,5 +68,13 @@ public class InputManager : MonoBehaviour
         {
             OnEscape.Invoke();
         }
+    }
+
+    public void ClearEvents()
+    {
+        OnMouseClick = null;
+        OnMouseHold = null;
+        OnEscape = null;
+        OnMouseUp = null;
     }
 }

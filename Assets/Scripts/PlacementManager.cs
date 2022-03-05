@@ -185,7 +185,7 @@ public class PlacementManager : MonoBehaviour
         temporaryRoadObjects.Clear();
     }
 
-        public StructureModel GetRandomRoad()
+    public StructureModel GetRandomRoad()
     {
         var point = placementGrid.GetRandomRoadPoint();
         return GetStructureAt(point);

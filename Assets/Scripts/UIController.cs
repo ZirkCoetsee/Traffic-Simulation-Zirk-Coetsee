@@ -57,7 +57,7 @@ public class UIController : MonoBehaviour
         outline.enabled = true;
     }
 
-    private void ResetButtonColor()
+    public void ResetButtonColor()
     {
         foreach (Button button in buttonList)
         {
