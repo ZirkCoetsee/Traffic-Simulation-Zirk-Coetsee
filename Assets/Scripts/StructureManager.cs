@@ -1,3 +1,6 @@
+// Implementation based on Sunny Vale Studio
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,15 +9,17 @@ using UnityEngine;
 
 public class StructureManager : MonoBehaviour
 {
-    public StructurePrefabWeighted [] housePrefabs, specialPrefabs;
+    public StructurePrefabWeighted [] housePrefabs, specialPrefabs, bigStructurePrefabs;
     public PlacementManager placementManager;
 
-    private float[] houseWeights, specialWeights;
+    private float[] houseWeights, specialWeights, bigStructureWeights;
 
     private void Start() 
     {
         houseWeights = housePrefabs.Select(prefabStats => prefabStats.weight).ToArray();
         specialWeights = specialPrefabs.Select(prefabStats => prefabStats.weight).ToArray();
+        bigStructureWeights = bigStructurePrefabs.Select(prefabStats => prefabStats.weight).ToArray();
+
     }
 
     public void PlaceHouse(Vector3Int position)
@@ -35,6 +40,44 @@ public class StructureManager : MonoBehaviour
             placementManager.PlaceObjectOnTheMap(position,specialPrefabs[randomIndex].prefab,CellType.Structure);
             // Play placement audio
         }
+    }
+
+    internal void PLaceBigStructure(Vector3Int position)
+    {
+        // Dimensions of big structure
+        // Can make them dynamic
+        int width = 2;
+        int height = 2;
+
+        if(CheckBigStructure(position, width, height)){
+            int randomIndex = GetRandomWeightedIndex(bigStructureWeights);
+            placementManager.PlaceObjectOnTheMap(position,bigStructurePrefabs[randomIndex].prefab,CellType.Structure,width,height);
+            // Play placement audio
+        }
+
+    }
+
+    private bool CheckBigStructure(Vector3Int position, int width, int height)
+    {
+        bool nearRoad = false;
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
+            {
+                var newPosition = position + new Vector3Int(x, 0, z);
+                // Check the positions
+
+                if(DefaultCheck(newPosition) == false)
+                {
+                    return false;
+                }
+                if(nearRoad == false)
+                {
+                    nearRoad = RoadCheck(newPosition);
+                }
+            }
+        }
+        return nearRoad;
     }
 
     private int GetRandomWeightedIndex(float[] weights)
@@ -62,6 +105,33 @@ public class StructureManager : MonoBehaviour
 
     private bool CheckPositionBeforePlacement(Vector3Int position)
     {
+        // Default checks when placing structures
+        if(DefaultCheck(position) == false)
+        {
+            return false;
+        }
+        // Only Place structure if they are near a road
+        if(RoadCheck(position) == false)
+        {
+            return false;
+        }
+ 
+        return true;
+
+    }
+
+    private bool RoadCheck(Vector3Int position)
+    { 
+        if(placementManager.GetNeighboursOfTypeFor(position,CellType.Road).Count <= 0)
+        {
+            Debug.Log("Please place object near a road");
+            return false;
+        }
+        return true;
+    }
+
+    private bool DefaultCheck(Vector3Int position)
+    {
         if(placementManager.CheckIfPositionInBound(position) == false)
         {
             Debug.Log("This position is out of bounds of the grid");
@@ -72,14 +142,7 @@ public class StructureManager : MonoBehaviour
             Debug.Log("This position is already taken");
             return false;
         }
-        // Only Place structure if they are near a road
-        if(placementManager.GetNeighboursOfTypeFor(position,CellType.Road).Count <= 0)
-        {
-            Debug.Log("Please place object near a road");
-            return false;
-        }
         return true;
-
     }
 }
 
@@ -90,6 +153,7 @@ public struct StructurePrefabWeighted
 {
     public GameObject prefab;
 
+    [Tooltip("For determining which prefabs will be selected more frequently by random selection")]
     [Range(0,1)]
     public float weight;
 

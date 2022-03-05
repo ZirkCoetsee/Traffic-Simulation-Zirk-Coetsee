@@ -1,3 +1,5 @@
+// Implementation based on Sunny Vale Studio
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,15 +9,15 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     // Delegates for buttons
-    public Action OnRoadPlacement, OnHousePlacement, OnSpecialPlacement;
-    public Button placeRoadButton, placeHouseButton, placeSpecialButton;
+    public Action OnRoadPlacement, OnHousePlacement, OnSpecialPlacement, OnBigStructurePlacement;
+    public Button placeRoadButton, placeHouseButton, placeSpecialButton, placeBigStructureButton;
 
     // Implement Outline
     public Color outlineColor;
     List<Button> buttonList;
 
     private void Start() {
-        buttonList = new List<Button> { placeHouseButton,placeRoadButton,placeSpecialButton };
+        buttonList = new List<Button> { placeHouseButton,placeRoadButton,placeSpecialButton,placeBigStructureButton  };
 
         // Add listeners to on button click event
         placeRoadButton.onClick.AddListener(()=>
@@ -37,6 +39,13 @@ public class UIController : MonoBehaviour
             ResetButtonColor();
             ModifyOutline(placeSpecialButton);
             OnSpecialPlacement?.Invoke();
+        });
+
+        placeBigStructureButton.onClick.AddListener(()=>
+        {
+            ResetButtonColor();
+            ModifyOutline(placeBigStructureButton);
+            OnBigStructurePlacement?.Invoke();
         });
         
     }
