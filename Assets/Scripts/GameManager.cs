@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        cameraMovement.MoveCamera(new Vector3(inputManager.CameraMovementVector.x,0,
-        inputManager.CameraMovementVector.y));
+        cameraMovement.MoveCamera(new Vector3(inputManager.CameraMovementVector.x,0,inputManager.CameraMovementVector.y));
     }
 }

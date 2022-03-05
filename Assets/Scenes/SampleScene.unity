@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91db9faa782d7cb4ab54590f70e51853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMovement: {fileID: 963194229}
+  cameraMovement: {fileID: 963194230}
   inputManager: {fileID: 2101213673}
   roadManager: {fileID: 1251089317}
   uiController: {fileID: 1191170544}
@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -855,10 +856,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e11c0fb2eb01d44902c2ce0726d514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boost: 3.5
+  positionLerpTime: 0.2
+  mouseSensitivityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 5
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 2.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  rotationLerpTime: 0.01
+  invertY: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8bac687fabe2cc488bcafeaea1aa5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameCamera: {fileID: 963194227}
+  gameCamera: {fileID: 0}
   cameraMovementSpeed: 5
   yRotation: 30
 --- !u!1 &1178154751
