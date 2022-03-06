@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class Marker : MonoBehaviour
@@ -19,5 +20,22 @@ public class Marker : MonoBehaviour
     public List<Vector3> GetAdjacentPositions()
     {
         return new List<Vector3>(adjacentMarkers.Select(x => x.Position).ToList());
+    }
+
+    //Debug to draw the connections between markers 
+    private void OnDrawGizmos() 
+    {
+        if(Selection.activeObject == gameObject)
+        {
+            Gizmos.color = Color.red;
+            if(adjacentMarkers.Count > 0)
+            {
+                foreach (var item in adjacentMarkers)
+                {
+                    Gizmos.DrawLine(transform.position, item.Position);
+                }
+            }
+            Gizmos.color = Color.white;
+        }
     }
 }

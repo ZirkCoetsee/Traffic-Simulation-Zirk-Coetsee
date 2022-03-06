@@ -132,7 +132,6 @@ public class AIDirector : MonoBehaviour
         // Assign method to a button to spawn cars at all houses
         foreach (var house in placementManager.GetAllHouses())
         {
-            Debug.Log(house.gameObject.name);
             TrySpawningACar(house, placementManager.GetRandomSpecialStructure());
         }
     }
@@ -146,7 +145,9 @@ public class AIDirector : MonoBehaviour
             var startRoadPosition = ((IRequireRoad)startStructure).RoadPosition;
             var endRoadPosition = ((IRequireRoad)endStructure).RoadPosition;
 
-            var path = placementManager.GetPathBetween(startRoadPosition,endRoadPosition);
+            var path = placementManager.GetPathBetween(startRoadPosition,endRoadPosition,true);
+            path.Reverse();
+
             var car = Instantiate(carPrefab,startRoadPosition, Quaternion.identity);
             // Cast position to vector 3
             car.GetComponent<CarAI>().SetPath( path.ConvertAll(x => (Vector3)x));

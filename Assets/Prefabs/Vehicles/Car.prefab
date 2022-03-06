@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3992839731126576140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.085, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.04
-  m_Center: {x: 0, y: -0.03, z: 0}
+  m_Center: {x: 0, y: 0.04, z: 0}
 --- !u!65 &5627396405972546268
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73,7 +73,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3992839731126576140}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.120838776, y: 0.104505375, z: 0.12488626}
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 10
-  torque: 0.01
-  maxSpeed: 3
+  torque: 0.02
+  maxSpeed: 0.4
   movementVector: {x: 0, y: 0}
 --- !u!114 &8591258028025393109
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: []
-  arriveDistance: 0.3
+  arriveDistance: 0.2
   lastpointArriveDistance: 0.1
   turningAngleOffset: 5
   currentTargetPosition: {x: 0, y: 0, z: 0}

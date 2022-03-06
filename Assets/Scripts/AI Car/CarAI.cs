@@ -12,7 +12,7 @@ public class CarAI : MonoBehaviour
     [SerializeField] private List<Vector3> path = null;
 
     // arriveDistance during travel can be further
-    [SerializeField] private float arriveDistance = .3f, lastpointArriveDistance = .1f;
+    [SerializeField] private float arriveDistance = .2f, lastpointArriveDistance = .1f;
 
     // Threshhold of to check the rotation of the car in relation to next point
     // Continue rotating car until angle is within 5 degrees

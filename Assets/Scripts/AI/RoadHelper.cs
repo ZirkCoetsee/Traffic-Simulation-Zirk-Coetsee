@@ -8,6 +8,7 @@ public class RoadHelper : MonoBehaviour
 {
     [Tooltip("All markers on selected prefab")]
     [SerializeField] protected List<Marker> pedestrianMarkers;
+    [SerializeField] protected List<Marker> carMarkers;
     [SerializeField] protected bool isCorner;
     [SerializeField] protected bool hasCrossWalks;
 
@@ -60,5 +61,10 @@ public class RoadHelper : MonoBehaviour
     public List<Marker> GetAllMarkers()
     {
         return pedestrianMarkers;
+    }
+
+    public List<Marker> GetAllCarMarkers()
+    {
+        return carMarkers;
     }
 }
