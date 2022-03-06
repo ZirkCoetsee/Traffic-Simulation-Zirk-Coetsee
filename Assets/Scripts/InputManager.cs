@@ -64,9 +64,9 @@ public class InputManager : MonoBehaviour
 
     private void CheckEscClick()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            OnEscape.Invoke();
+            OnEscape?.Invoke();
         }
     }
 

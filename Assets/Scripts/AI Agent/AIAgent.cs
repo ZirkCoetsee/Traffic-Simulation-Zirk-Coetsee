@@ -22,6 +22,20 @@ public class AIAgent : MonoBehaviour
     int index = 0;
     Vector3 endPosition;
 
+    public Color pathColor;
+    PathVisualizer pathVisualizer;
+
+    private void Start()
+    {
+        pathVisualizer = FindObjectOfType<PathVisualizer>();
+        pathColor = UnityEngine.Random.ColorHSV(0f,1f,0f,1f,0,1f);
+    }
+
+    public void ShowPath()
+    {
+        pathVisualizer.ShowPath(pathToGo,this,pathColor);
+    }
+
     public void Initialize(List<Vector3> path)
     {
         pathToGo = path;
@@ -61,13 +75,15 @@ public class AIAgent : MonoBehaviour
     private float MoveTheAgent()
     {
         float step = speed * Time.deltaTime;
-        // Returns distance remaining to next position
-        transform.position = Vector3.MoveTowards(transform.position, endPosition,step);
+        Vector3 endPositionCorrect = new Vector3(endPosition.x,transform.position.y, endPosition.z);
 
-        var lookDirection = endPosition - transform.position;
+        // Returns distance remaining to next position
+        transform.position = Vector3.MoveTowards(transform.position,endPositionCorrect,step);
+
+        var lookDirection = endPositionCorrect - transform.position;
         // Smooth rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * rotationSpeed);
-        return Vector3.Distance(transform.position, endPosition);
+        return Vector3.Distance(transform.position, endPositionCorrect);
     }
 
     private void OnDestroy() 

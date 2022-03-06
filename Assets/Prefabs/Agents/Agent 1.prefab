@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565532824479133653}
   - component: {fileID: 5829293005437655088}
+  - component: {fileID: 5047627307208168327}
   m_Layer: 0
   m_Name: Agent 1
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.2
   rotationSpeed: 10
+  pathColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!136 &5047627307208168327
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199734145006156860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.05065412
+  m_Height: 0.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &5028016396707032027
 GameObject:
   m_ObjectHideFlags: 0

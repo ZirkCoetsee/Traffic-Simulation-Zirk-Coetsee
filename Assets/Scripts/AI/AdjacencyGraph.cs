@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class AdjacencyGraph
 {
+    // Graph for storing adjacent Vertex class objects on road structures
        Dictionary<Vertex, List<Vertex>> adjacencyDictionary = new Dictionary<Vertex, List<Vertex>>();
 
         public Vertex AddVertex(Vector3 position)
@@ -27,6 +28,7 @@ public class AdjacencyGraph
 
         private void AddVertex(Vertex v)
         {
+            // Make sure the graph does not contain the passed Vertex Object class
             if (adjacencyDictionary.ContainsKey(v))
                 return;
             adjacencyDictionary.Add(v, new List<Vertex>());
@@ -44,6 +46,7 @@ public class AdjacencyGraph
 
         public void AddEdge(Vector3 position1, Vector3 position2)
         {
+            // Can't create a edge between the same vertex
             if(CompareVertices(position1, position2))
             {
                 return;
@@ -58,6 +61,7 @@ public class AdjacencyGraph
             {
                 v2 = new Vertex(position2);
             }
+            // Add both directions
             AddEdgeBetween(v1, v2);
             AddEdgeBetween(v2, v1);
 
@@ -71,6 +75,7 @@ public class AdjacencyGraph
             }
             if (adjacencyDictionary.ContainsKey(v1))
             {
+                //List can take two same vertices as two spaces on list so make sure not to add the edge twice
                 if(adjacencyDictionary[v1].FirstOrDefault(x => x == v2) == null)
                 {
                     adjacencyDictionary[v1].Add(v2);
@@ -111,6 +116,8 @@ public class AdjacencyGraph
             return adjacencyDictionary.Keys;
         }
 
+        //For debugging override the ToString Method
+        // Print all adjacent vertex to current vertex
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
@@ -142,7 +149,7 @@ public class AdjacencyGraph
             {
                 Vertex current = GetClosestVertex(positionsTocheck, priorityDictionary);
                 positionsTocheck.Remove(current);
-                if (current.Equals(endPosition))
+                if (current.Equals(end))
                 {
                     path = GeneratePath(parentsDictionary, current);
                     return path;
@@ -193,6 +200,7 @@ public class AdjacencyGraph
                 path.Add(parent.Position);
                 parent = parentMap[parent];
             }
+            path.Reverse();
             return path;
         }
 }

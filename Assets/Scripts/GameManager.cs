@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     public RoadManager roadManager;
     public UIController uiController;
     public StructureManager structureManager;
-
     public ObjectDetector objectDetector;
+    public PathVisualizer pathVisualizer;
+
 
 
 
@@ -34,6 +35,18 @@ public class GameManager : MonoBehaviour
     {
         ClearInputActions();
         uiController.ResetButtonColor();
+        pathVisualizer.ResetPath();
+        inputManager.OnMouseClick += TrySelectingAgent;
+    }
+
+    private void TrySelectingAgent(Ray ray)
+    {
+        GameObject hitObject = objectDetector.RaycastAll(ray);
+        if (hitObject != null)
+        {
+            var agentScript = hitObject.GetComponent<AIAgent>();
+            agentScript?.ShowPath();
+        }
     }
 
     private void BigStructurePlacementHandler()

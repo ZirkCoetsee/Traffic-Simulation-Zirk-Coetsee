@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class Vertex : IEquatable<Vertex>
 {
+    // Dictionary of Vertex classes and a list of vertex that are adjacent to these vertex
+
     public Vector3 Position { get; private set; }
     public Vertex(Vector3 position)
     {
