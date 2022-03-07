@@ -44,26 +44,29 @@ public class AdjacencyGraph
             return Vector3.SqrMagnitude(position1 - position2) < 0.0001f;
         }
 
-        public void AddEdge(Vector3 position1, Vector3 position2)
+        public void AddEdge(Vector3 startPosition, Vector3 endPosition)
         {
             // Can't create a edge between the same vertex
-            if(CompareVertices(position1, position2))
+            if(CompareVertices(startPosition, endPosition))
             {
                 return;
             }
-            var v1 = GetVertexAt(position1);
-            var v2 = GetVertexAt(position2);
+            var v1 = GetVertexAt(startPosition);
+            var v2 = GetVertexAt(endPosition);
             if(v1 == null)
             {
-                v1 = new Vertex(position1);
+                v1 = new Vertex(startPosition);
+                AddVertex(v1);
             }
             if(v2 == null)
             {
-                v2 = new Vertex(position2);
+                v2 = new Vertex(endPosition);
+                AddVertex(v2);
             }
             // Add both directions
+            // Changed this to only add in once direction to create a directional graph for 3 Way
             AddEdgeBetween(v1, v2);
-            AddEdgeBetween(v2, v1);
+            // AddEdgeBetween(v2, v1);
 
         }
 

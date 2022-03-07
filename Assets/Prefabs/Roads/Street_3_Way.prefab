@@ -170,8 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333c65465cfc26e449a625b06c222f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentMarkers:
-  - {fileID: 2318767736963587976}
+  adjacentMarkers: []
   openForConnections: 1
 --- !u!1 &1497063381262765197
 GameObject:
@@ -218,7 +217,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentMarkers:
   - {fileID: 4393846244510397093}
-  - {fileID: 5601842334680413762}
   - {fileID: 8097455982014002747}
   - {fileID: 6480322159009918978}
   openForConnections: 0
@@ -644,10 +642,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentMarkers:
-  - {fileID: 3381753724714834420}
   - {fileID: 4393846244510397093}
   - {fileID: 7801140979636104977}
-  - {fileID: 2846783053468658772}
   openForConnections: 0
 --- !u!1 &4326109919205958479
 GameObject:
@@ -694,8 +690,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentMarkers:
   - {fileID: 6740621949444240465}
-  - {fileID: 2846783053468658772}
-  - {fileID: 8031577060370677839}
   openForConnections: 0
 --- !u!1 &4586425265056336714
 GameObject:
@@ -781,8 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333c65465cfc26e449a625b06c222f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentMarkers:
-  - {fileID: 6480322159009918978}
+  adjacentMarkers: []
   openForConnections: 1
 --- !u!1 &5907780205340655369
 GameObject:
@@ -829,8 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentMarkers:
   - {fileID: 2318767736963587976}
-  - {fileID: 3824313396116268927}
-  - {fileID: 8031577060370677839}
+  - {fileID: 6480322159009918978}
   openForConnections: 0
 --- !u!1 &6215943422782879616
 GameObject:
@@ -1319,7 +1311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentMarkers:
-  - {fileID: 2318767736963587976}
   - {fileID: 8031577060370677839}
   openForConnections: 0
 --- !u!1 &8971221648084826200
@@ -1365,6 +1356,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333c65465cfc26e449a625b06c222f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentMarkers:
-  - {fileID: 8031577060370677839}
+  adjacentMarkers: []
   openForConnections: 1

@@ -2000,6 +2000,9 @@ MonoBehaviour:
   placementManager: {fileID: 793579610}
   pedestrianPrefabs:
   - {fileID: 199734145006156860, guid: 39fd868fee3991647a475faff4216fd3, type: 3}
+  - {fileID: 199734145006156860, guid: 176831f524839ae4c9bea9daad012807, type: 3}
+  - {fileID: 199734145006156860, guid: 2a5b6e7f8f32af240b6386e5cc2b3332, type: 3}
+  - {fileID: 199734145006156860, guid: 3a2cf790b6766de4792e3bfed5bf9002, type: 3}
   carPrefab: {fileID: 3992839731126576140, guid: 450a885c01fdf1d43b14f665a1f1075b, type: 3}
 --- !u!4 &1806101108
 Transform:
@@ -2084,7 +2087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -133, y: -97}
+  m_AnchoredPosition: {x: -133, y: -39}
   m_SizeDelta: {x: 252.82, y: 48.707306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1841052184
@@ -2312,7 +2315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -133, y: -32}
+  m_AnchoredPosition: {x: -133, y: -96}
   m_SizeDelta: {x: 252.82, y: 48.707306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1921965521
