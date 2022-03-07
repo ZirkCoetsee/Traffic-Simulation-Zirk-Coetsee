@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3987988100332378821}
   - component: {fileID: 3949635331044225073}
   - component: {fileID: 8591258028025393109}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4493657522220714451}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,8 +77,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.120838776, y: 0.104505375, z: 0.12488626}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.071296796, y: 0.052209165, z: 0.1091214}
+  m_Center: {x: 0.00075063854, y: 0.026148105, z: 0.0012093708}
 --- !u!114 &3987988100332378821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrafabs:
   - {fileID: 6143973635089492001, guid: 1d6c8b59f86f5f742bca222b1b918659, type: 3}
+  - {fileID: 6143973635089492001, guid: 60da4133cad75544ea47642efb22c51a, type: 3}
+  - {fileID: 6143973635089492001, guid: cd949cec6f20e914091f701a3ddd8314, type: 3}
+  - {fileID: 6143973635089492001, guid: 409ef6fd08e3b2c408cc5bd1beffdc39, type: 3}
 --- !u!114 &3949635331044225073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +129,8 @@ MonoBehaviour:
   lastpointArriveDistance: 0.1
   turningAngleOffset: 5
   currentTargetPosition: {x: 0, y: 0, z: 0}
+  raycastStartingPoint: {fileID: 7910033852448298861}
+  collisionRayCastLength: 0.1
   <OnDrive>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -140,3 +146,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &7910033852448298861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4493657522220714451}
+  m_Layer: 0
+  m_Name: RayCastStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4493657522220714451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910033852448298861}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.004, y: 0.027, z: 0.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3992839731126576138}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

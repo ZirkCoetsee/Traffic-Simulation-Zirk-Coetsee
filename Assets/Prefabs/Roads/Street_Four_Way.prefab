@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 565532824479133653}
   - component: {fileID: 4293880034039629692}
+  - component: {fileID: 6505784332812936664}
+  - component: {fileID: 5723435401628644121}
   m_Layer: 0
   m_Name: Street_Four_Way
   m_TagString: Untagged
@@ -38,6 +40,7 @@ Transform:
   - {fileID: 5097088109014576361}
   - {fileID: 3537799554114566770}
   - {fileID: 1231093325575281521}
+  - {fileID: 3991418630454501027}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,8 +61,54 @@ MonoBehaviour:
   - {fileID: 6491768872960100463}
   - {fileID: 6553425724008031073}
   - {fileID: 9190632044247062198}
+  carMarkers:
+  - {fileID: 5924155385455118204}
+  - {fileID: 5097798992843381203}
+  - {fileID: 6672093867629247049}
+  - {fileID: 6620775125064722306}
+  - {fileID: 6326286607756714262}
+  - {fileID: 5590555803565390810}
+  - {fileID: 2859373841460137684}
+  - {fileID: 2087074715257774942}
+  - {fileID: 9021734755688025945}
+  - {fileID: 4720063048753840784}
+  - {fileID: 6319297222694241797}
+  - {fileID: 8806992348512992408}
   isCorner: 0
   hasCrossWalks: 1
+  incoming: {fileID: 0}
+  outgoing: {fileID: 0}
+--- !u!65 &6505784332812936664
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199734145006156860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9470482, y: 0.5197777, z: 0.9461475}
+  m_Center: {x: 0, y: 0.24011114, z: -0.010835499}
+--- !u!114 &5723435401628644121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199734145006156860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d17f6b731750f429ab73ac469475dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCar: {fileID: 0}
+  pedestrianWaiting: 0
+  pedestrianWalking: 0
+  <OnPedestrianCanwalk>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &581802962345275306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1061,135 @@ MonoBehaviour:
   - {fileID: 6319297222694241797}
   - {fileID: 5097798992843381203}
   openForConnections: 0
+--- !u!1 &7266476587057968458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3991418630454501027}
+  - component: {fileID: 845736654294576921}
+  - component: {fileID: 126231662539594074}
+  - component: {fileID: 5984733428684689287}
+  - component: {fileID: 2055933657861803801}
+  - component: {fileID: 5643627480453705555}
+  m_Layer: 0
+  m_Name: SmartCrossWalks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3991418630454501027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 565532824479133653}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &845736654294576921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18748176, y: 0.120000005, z: 0.61359245}
+  m_Center: {x: 0.40625912, y: 0.11, z: 0.0020784438}
+--- !u!65 &126231662539594074
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6158896, y: 0, z: 0.18295503}
+  m_Center: {x: -0.00043532252, y: 0.17, z: 0.40748304}
+--- !u!65 &5984733428684689287
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6182761, y: 0, z: 0.18487006}
+  m_Center: {x: -0.0016285926, y: 0.17, z: -0.4}
+--- !u!65 &2055933657861803801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18748176, y: 0.120000005, z: 0.61359245}
+  m_Center: {x: -0.4, y: 0.11, z: 0.0020784438}
+--- !u!114 &5643627480453705555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266476587057968458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d274f6367173277458b294723facb708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <OnPedestrianEnter>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5723435401628644121}
+        m_TargetAssemblyTypeName: SmartRoad, Assembly-CSharp
+        m_MethodName: SetPedestrianFlag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  <OnPedestrianExit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5723435401628644121}
+        m_TargetAssemblyTypeName: SmartRoad, Assembly-CSharp
+        m_MethodName: SetPedestrianFlag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7674370541708171583
 GameObject:
   m_ObjectHideFlags: 0

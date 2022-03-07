@@ -25,6 +25,29 @@ public class AIAgent : MonoBehaviour
     public Color pathColor;
     PathVisualizer pathVisualizer;
 
+    Rigidbody rb;
+
+    private bool stop;
+    public bool Stop
+    {
+        get { return stop; }
+        set { stop = value; 
+            if(stop)
+            {
+                rb.velocity = Vector3.zero;
+                // Stop walk animation
+            }
+            else
+            {
+                // start walk animation
+            }
+        }
+    }
+    
+    private void Awake() {
+    rb = GetComponent<Rigidbody>(); 
+    }
+
     private void Start()
     {
         pathVisualizer = FindObjectOfType<PathVisualizer>();
@@ -43,11 +66,12 @@ public class AIAgent : MonoBehaviour
         moveFlag = true;
         endPosition = pathToGo[index];
         // animator.GetComponent<Animator>();
-        // animator.SetTrigger("Walk");
+        Stop = false;
     }
 
-    private void Update() {
-        if (moveFlag)
+    private void Update() 
+    {
+        if (moveFlag && Stop == false)
         {
             PerformMovement();
         }
@@ -78,8 +102,8 @@ public class AIAgent : MonoBehaviour
         Vector3 endPositionCorrect = new Vector3(endPosition.x,transform.position.y, endPosition.z);
 
         // Returns distance remaining to next position
-        transform.position = Vector3.MoveTowards(transform.position,endPositionCorrect,step);
-
+        // transform.position = Vector3.MoveTowards(transform.position,endPositionCorrect,step);
+        rb.velocity = transform.forward * speed;
         var lookDirection = endPositionCorrect - transform.position;
         // Smooth rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * rotationSpeed);

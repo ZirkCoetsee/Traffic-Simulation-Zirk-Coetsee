@@ -6,20 +6,38 @@ using UnityEngine;
 
 public class RoadHelper : MonoBehaviour
 {
-    [Tooltip("All markers on selected prefab")]
+    [Tooltip("All pedestrian markers on selected prefab")]
     [SerializeField] protected List<Marker> pedestrianMarkers;
+    [Tooltip("All car markers on selected prefab")]
     [SerializeField] protected List<Marker> carMarkers;
     [SerializeField] protected bool isCorner;
     [SerializeField] protected bool hasCrossWalks;
 
     float approximateThresholdCorner = 0.3f;
 
+    [Tooltip("Only for dead end road")]
+    [SerializeField] private Marker incoming,outgoing;
+
     public virtual Marker GetPositionForPedestrianToSpawn( Vector3 structurePosition)
     {
         return GetClosestMarkerTo(structurePosition, pedestrianMarkers);
     }
 
-    private Marker GetClosestMarkerTo(Vector3 structurePosition, List<Marker> pedestrianMarkers, bool isCorner = false)
+    public virtual Marker GetPositionForCarToSpawn( Vector3 nextPathPosition)
+    {
+        // return outgoing marker as spawn point
+        return outgoing;
+    }
+
+    // keep virtual to override in child scripts
+    public virtual Marker GetPositionForCarToEnd( Vector3 previousPathPosition)
+    {
+        // return incoming marker as spawn point
+        return incoming;
+    }
+
+    // protected to allow child classes to access it
+    protected Marker GetClosestMarkerTo(Vector3 structurePosition, List<Marker> pedestrianMarkers, bool isCorner = false)
     {
         if(isCorner)
         {
@@ -56,6 +74,11 @@ public class RoadHelper : MonoBehaviour
     public Vector3 GetClosestPedestrianPosition(Vector3 currentPosition)
     {
         return GetClosestMarkerTo(currentPosition, pedestrianMarkers, isCorner).Position;
+    }
+
+    public Vector3 GetClosestCarMarkerPosition(Vector3 currentPosition)
+    {
+        return GetClosestMarkerTo(currentPosition, carMarkers, false).Position;
     }
 
     public List<Marker> GetAllMarkers()

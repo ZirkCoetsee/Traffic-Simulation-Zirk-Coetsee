@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565532824479133653}
-  - component: {fileID: 8838200042029487684}
+  - component: {fileID: 5014360184048150774}
   m_Layer: 0
   m_Name: Street_Straight
   m_TagString: Untagged
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199734145006156860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -36,8 +36,8 @@ Transform:
   - {fileID: 5728121364435614934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8838200042029487684
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5014360184048150774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,14 +46,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 199734145006156860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29d1a3b520c70d429f2a8dfcb7c1811, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dcb170cb9a25ea46963fb01a422a6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pedestrianMarkers:
   - {fileID: 404015031789841739}
   - {fileID: 4708790981540144581}
+  carMarkers:
+  - {fileID: 3989018233541333114}
+  - {fileID: 3107489188667504880}
   isCorner: 0
   hasCrossWalks: 0
+  incoming: {fileID: 0}
+  outgoing: {fileID: 0}
+  leftLaneMarker90: {fileID: 3989018233541333114}
+  rightLaneMarker90: {fileID: 3107489188667504880}
 --- !u!1 &1041447769704666239
 GameObject:
   m_ObjectHideFlags: 0

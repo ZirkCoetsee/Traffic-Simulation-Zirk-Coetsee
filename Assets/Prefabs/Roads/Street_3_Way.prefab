@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565532824479133653}
-  - component: {fileID: 7448826620838293205}
+  - component: {fileID: 2694632960339305250}
+  - component: {fileID: 4769291306030255266}
+  - component: {fileID: 3104856146616230982}
   m_Layer: 0
   m_Name: Street_3_Way
   m_TagString: Untagged
@@ -37,10 +39,11 @@ Transform:
   - {fileID: 3517068386958467600}
   - {fileID: 4833556331955996765}
   - {fileID: 7844961621607801036}
+  - {fileID: 3444326397810773119}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7448826620838293205
+--- !u!114 &2694632960339305250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +52,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199734145006156860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29d1a3b520c70d429f2a8dfcb7c1811, type: 3}
+  m_Script: {fileID: 11500000, guid: c505bd93713606a438079a59638f7e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pedestrianMarkers:
@@ -57,8 +60,73 @@ MonoBehaviour:
   - {fileID: 5867503606809406740}
   - {fileID: 700117527864400305}
   - {fileID: 8732671236250167929}
+  carMarkers:
+  - {fileID: 3381753724714834420}
+  - {fileID: 2318767736963587976}
+  - {fileID: 8031577060370677839}
+  - {fileID: 6740621949444240465}
+  - {fileID: 6480322159009918978}
+  - {fileID: 2846783053468658772}
+  - {fileID: 8097455982014002747}
+  - {fileID: 3824313396116268927}
+  - {fileID: 7801140979636104977}
+  - {fileID: 5601842334680413762}
+  - {fileID: 4393846244510397093}
   isCorner: 0
   hasCrossWalks: 1
+  incoming: {fileID: 0}
+  outgoing: {fileID: 0}
+  incomingMarkers:
+  - {fileID: 3381753724714834420}
+  - {fileID: 3824313396116268927}
+  - {fileID: 5601842334680413762}
+  outgoingMarkers:
+  - {fileID: 8097455982014002747}
+  - {fileID: 6740621949444240465}
+  - {fileID: 7801140979636104977}
+--- !u!65 &4769291306030255266
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199734145006156860}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9470482, y: 0.5197777, z: 0.9461475}
+  m_Center: {x: 0, y: 0.24011114, z: -0.010835499}
+--- !u!114 &3104856146616230982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199734145006156860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d17f6b731750f429ab73ac469475dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCar: {fileID: 0}
+  pedestrianWaiting: 0
+  pedestrianWalking: 0
+  <OnPedestrianCanwalk>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5449479666776015397}
+        m_TargetAssemblyTypeName: SmartCrossWalks, Assembly-CSharp
+        m_MethodName: MovePedestrians
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &886667927880096745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1114,121 @@ MonoBehaviour:
   adjacentMarkers:
   - {fileID: 8031577060370677839}
   openForConnections: 1
+--- !u!1 &8230009189288584314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3444326397810773119}
+  - component: {fileID: 4638866677283860211}
+  - component: {fileID: 3568893126740784995}
+  - component: {fileID: 5314967500676070175}
+  - component: {fileID: 5449479666776015397}
+  m_Layer: 0
+  m_Name: SmartCrossWalks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3444326397810773119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230009189288584314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 565532824479133653}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4638866677283860211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230009189288584314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18748176, y: 0.120000005, z: 0.61359245}
+  m_Center: {x: 0.40625912, y: 0.11, z: 0.0020784438}
+--- !u!65 &3568893126740784995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230009189288584314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6158896, y: 0, z: 0.18295503}
+  m_Center: {x: -0.00043532252, y: 0.17, z: 0.40748304}
+--- !u!65 &5314967500676070175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230009189288584314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6182761, y: 0, z: 0.18487006}
+  m_Center: {x: -0.0016285926, y: 0.17, z: -0.4}
+--- !u!114 &5449479666776015397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230009189288584314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d274f6367173277458b294723facb708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <OnPedestrianEnter>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3104856146616230982}
+        m_TargetAssemblyTypeName: SmartRoad, Assembly-CSharp
+        m_MethodName: SetPedestrianFlag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  <OnPedestrianExit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3104856146616230982}
+        m_TargetAssemblyTypeName: SmartRoad, Assembly-CSharp
+        m_MethodName: SetPedestrianFlag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8446184316325485668
 GameObject:
   m_ObjectHideFlags: 0

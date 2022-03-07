@@ -1,6 +1,7 @@
 // Implementation based on Sunny Vale Studio
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +34,7 @@ public class StructureModel : MonoBehaviour, IRequireRoad
     }
 
     // Assumes that the child object is a child prefab of the structure model
-    public Vector3 GetNearestMarkerTo(Vector3 position)
+    public Vector3 GetNearestPedestrianMarkerTo(Vector3 position)
     {
         return transform.GetChild(0).GetComponent<RoadHelper>().GetClosestPedestrianPosition(position);
     }
@@ -45,5 +46,25 @@ public class StructureModel : MonoBehaviour, IRequireRoad
 
     public List<Marker> GetPedestrianMarkers(){
         return transform.GetChild(0).GetComponent<RoadHelper>().GetAllMarkers();
+    }
+
+    internal List<Marker> GetCarMarkers()
+    {
+        return transform.GetChild(0).GetComponent<RoadHelper>().GetAllCarMarkers();
+    }
+
+    public Vector3 GetNearestCarMarkerTo(Vector3 position)
+    {
+        return transform.GetChild(0).GetComponent<RoadHelper>().GetClosestCarMarkerPosition(position);
+    }
+
+    public Marker GetCarSpawnMarker(Vector3Int nextPathPosition)
+    {
+        return transform.GetChild(0).GetComponent<RoadHelper>().GetPositionForCarToSpawn(nextPathPosition);
+    }
+
+    public Marker GetCarEndMarker(Vector3Int previousPathPosition)
+    {
+        return transform.GetChild(0).GetComponent<RoadHelper>().GetPositionForCarToEnd(previousPathPosition);
     }
 }

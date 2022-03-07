@@ -14,7 +14,10 @@ public class AIDirector : MonoBehaviour
 
     public GameObject carPrefab;
 
-    AdjacencyGraph graph = new AdjacencyGraph();
+    AdjacencyGraph pedestrianGraph = new AdjacencyGraph();
+    AdjacencyGraph carGraph = new AdjacencyGraph();
+    
+    List<Vector3> carPath = new List<Vector3>();
 
     public void SpawnAllAgents()
     {
@@ -62,15 +65,15 @@ public class AIDirector : MonoBehaviour
 
     private List<Vector3> GetPedestrianPath(List<Vector3Int> path, Vector3 startPosition, Vector3 endPosition)
     {
-        graph.ClearGraph();
-        CreateAGraph(path);
+        pedestrianGraph.ClearGraph();
+        CreateAPedestrianGraph(path);
         // Overiden string
-        Debug.Log(graph);
+        Debug.Log(pedestrianGraph);
 
-        return AdjacencyGraph.AStarSearch(graph,startPosition,endPosition);
+        return AdjacencyGraph.AStarSearch(pedestrianGraph,startPosition,endPosition);
     }
 
-    private void CreateAGraph(List<Vector3Int> path)
+    private void CreateAPedestrianGraph(List<Vector3Int> path)
     {
         //For 3 Way and 4 Way crossings
          Dictionary<Marker,Vector3> tempDictionary = new Dictionary<Marker, Vector3>();
@@ -87,10 +90,10 @@ public class AIDirector : MonoBehaviour
              foreach (var marker in markerList)
              {
                 //  Add markers from prefab to graph since they are traversable 
-                 graph.AddVertex(marker.Position);
+                 pedestrianGraph.AddVertex(marker.Position);
                  foreach (var markerNeighbourPosition in marker.GetAdjacentPositions())
                  {
-                     graph.AddEdge(marker.Position, markerNeighbourPosition);
+                     pedestrianGraph.AddEdge(marker.Position, markerNeighbourPosition);
                  }
 
                  if(marker.OpenForConnections && i+1 < path.Count)
@@ -100,10 +103,10 @@ public class AIDirector : MonoBehaviour
                     // If limit is true, don't add the markers directly to graph but to temp
                     if (limitDistance)
                      {
-                         tempDictionary.Add(marker, nextRoadStructure.GetNearestMarkerTo(marker.Position));
+                         tempDictionary.Add(marker, nextRoadStructure.GetNearestPedestrianMarkerTo(marker.Position));
                      }else
                      {
-                         graph.AddEdge(marker.Position, nextRoadStructure.GetNearestMarkerTo(marker.Position));
+                         pedestrianGraph.AddEdge(marker.Position, nextRoadStructure.GetNearestPedestrianMarkerTo(marker.Position));
                      }
                  }
              }
@@ -114,11 +117,69 @@ public class AIDirector : MonoBehaviour
                 //Only take the 2 positions
                 for (int j = 0; j < 2; j++)
                 {
-                    graph.AddEdge(distanceSortedMembers[j].Key.Position, distanceSortedMembers[j].Value);
+                    pedestrianGraph.AddEdge(distanceSortedMembers[j].Key.Position, distanceSortedMembers[j].Value);
                 }
              }
 
          }
+    }
+
+    private List<Vector3> GetCarPath(List<Vector3Int> path, Vector3 startPosition, Vector3 endPosition)
+    {
+        carGraph.ClearGraph();
+        CreateACarGraph(path);
+        // Overiden string
+        Debug.Log(carGraph);
+        return AdjacencyGraph.AStarSearch(carGraph,startPosition,endPosition);
+    }
+
+    private void CreateACarGraph(List<Vector3Int> path)
+    {
+        // Dictionary for curve markers
+        Dictionary<Marker, Vector3> tempDictionary = new Dictionary<Marker, Vector3>();
+        // Loop through each road and connect the car graph nodes
+        for (int i = 0; i < path.Count(); i++)
+        {
+            var currentPosition = path[i];
+            var roadStructure = placementManager.GetStructureAt(currentPosition);
+            var markersList = roadStructure.GetCarMarkers();
+            // Check if there are multiple markers in prefab
+            var limitDistance = markersList.Count > 3;
+            tempDictionary.Clear();
+
+            foreach (var marker in markersList)
+            {
+                carGraph.AddVertex(marker.Position);
+                // All connected markers
+                foreach (var markerNeighbour in marker.adjacentMarkers)
+                {
+                    carGraph.AddEdge(marker.Position,markerNeighbour.Position);
+                }
+                // If marker is open for connections and the next prefab is available
+                if (marker.OpenForConnections && i + 1 < path.Count)
+                {
+                    var nextRoadPosition = placementManager.GetStructureAt(path[i + 1]);
+                    // Add the node to temporary dictionary if it is within distance
+                    if(limitDistance)
+                    {
+                        tempDictionary.Add(marker, nextRoadPosition.GetNearestCarMarkerTo(marker.Position));
+                    }
+                    else
+                    {
+                        carGraph.AddEdge(marker.Position, nextRoadPosition.GetNearestCarMarkerTo(marker.Position));
+                    }
+                }
+            }
+            if (limitDistance && tempDictionary.Count > 1)
+            {
+                var distanceSortedMarkers = tempDictionary.OrderBy(x => Vector3.Distance(x.Key.Position, x.Value)).ToList();
+                // Only add two markers because a straight road markers can only connect to two other
+                for (int j = 0; j < 2; j++)
+                {
+                    carGraph.AddEdge(distanceSortedMarkers[j].Key.Position, distanceSortedMarkers[j].Value);
+                }
+            }
+        }
     }
 
     private GameObject GetRandomPedestrian()
@@ -148,19 +209,42 @@ public class AIDirector : MonoBehaviour
             var path = placementManager.GetPathBetween(startRoadPosition,endRoadPosition,true);
             path.Reverse();
 
-            var car = Instantiate(carPrefab,startRoadPosition, Quaternion.identity);
-            // Cast position to vector 3
-            car.GetComponent<CarAI>().SetPath( path.ConvertAll(x => (Vector3)x));
+            // Path may be empty
+            if (path.Count == 0 && path.Count > 2)
+            {
+                return;
+            }
+            // Index 1 is outgoing position
+            var startMarkerPosition = placementManager.GetStructureAt(startRoadPosition).GetCarSpawnMarker(path[1]);
+            var endMarkerPosition = placementManager.GetStructureAt(endRoadPosition).GetCarEndMarker(path[path.Count - 2]);
 
+            carPath = GetCarPath(path, startMarkerPosition.Position, endMarkerPosition.Position);
+            // Check if there is a path
+            if (carPath.Count > 0)
+            {
+                var car = Instantiate(carPrefab,startMarkerPosition.Position, Quaternion.identity);
+                // Cast position to vector 3
+                car.GetComponent<CarAI>().SetPath(carPath);
+            }
         }
     }
 
-    private void Update() {
+    private void Update()
+    {
+        // DrawGraph(carGraph);
+        for (int i = 1; i < carPath.Count; i++)        
+        {
+            Debug.DrawLine(carPath[i - 1]+ Vector3.up, carPath[i]+ Vector3.up, Color.blue);
+        }
+    }
+
+    private void DrawGraph(AdjacencyGraph graph)
+    {
         foreach (var vertex in graph.GetVertices())
         {
             foreach (var vertexNeighbour in graph.GetConnectedVerticesTo(vertex))
             {
-                Debug.DrawLine(vertex.Position + Vector3.up,vertexNeighbour.Position + Vector3.up,Color.red);
+                Debug.DrawLine(vertex.Position + Vector3.up, vertexNeighbour.Position + Vector3.up, Color.red);
             }
         }
     }

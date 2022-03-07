@@ -14,6 +14,11 @@ public class CarAI : MonoBehaviour
     // arriveDistance during travel can be further
     [SerializeField] private float arriveDistance = .2f, lastpointArriveDistance = .1f;
 
+    internal bool IsLastPathIndex()
+    {
+        return index >= path.Count-1;
+    }
+
     // Threshhold of to check the rotation of the car in relation to next point
     // Continue rotating car until angle is within 5 degrees
     [SerializeField] private float turningAngleOffset = 5f;
@@ -21,13 +26,19 @@ public class CarAI : MonoBehaviour
     //Serialized this field to debug view the target 
     [SerializeField] private Vector3 currentTargetPosition;
 
+    [SerializeField] private GameObject raycastStartingPoint = null;
+    [SerializeField] private float collisionRayCastLength = 0.1f;
+
+
+
     private int index = 0;
 
     // Stop car via private property
     private bool stop;
+    private bool collisionStop = false;
     public bool Stop
     {
-        get { return stop; }
+        get { return stop || collisionStop;}
         set { stop = value; }
     }
 
@@ -73,6 +84,21 @@ public class CarAI : MonoBehaviour
     {
         CheckIfArrived();
         Drive();
+        CheckForCollisions();
+
+    }
+
+    private void CheckForCollisions()
+    {
+        // Pass the layer with bitshift to the left to create a layer mask
+        if(Physics.Raycast(raycastStartingPoint.transform.position, transform.forward,collisionRayCastLength, 1 << gameObject.layer))
+        {
+            collisionStop = true;
+        }
+        else
+        {
+            collisionStop = false;
+        }
     }
 
     private void Drive()
