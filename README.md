@@ -53,7 +53,41 @@ Credit:
 Implementation based on tutorial series by Sunny Valley Studio
 https://www.sunnyvalleystudio.com/
 
-And there you have it thank you for having a look!
+And there you have it thank you for having a look! Time sheet below.
+
+How to play:
+On launch of game you will see the ground plane with multiple buttons in the building menu, on the top right you will see spawn agents( pedestrians) and spawn cars![Start Screen](https://user-images.githubusercontent.com/65532299/157320050-7dd2b98d-8524-402b-b206-b4f8582691a9.png)
+
+Adding Roads:
+By selecting the roads button you can click or click and drag to create your desired road structure.
+![Road Place Scene](https://user-images.githubusercontent.com/65532299/157320188-5101348b-8134-448a-8ad7-62ae3a59c747.png)
+
+Adding Houses:
+By selecting the house button you can click and place houses near roads.
+![House Place Screen](https://user-images.githubusercontent.com/65532299/157320274-10efa5f2-8183-45e1-9153-c8dea204c2af.png)
+
+Adding Special buildings:
+By selecting special building you can click and place special buildings near roads as pedestrians and cars wil move form special buildings to houses and from houses to special buildings.
+![Special Structures Screen](https://user-images.githubusercontent.com/65532299/157320537-42f5cfb9-3633-41a2-97e2-79b0ac5644d5.png)
+
+Adding Houses that are 2x2:
+By selecting houses 2x2 you can click and place 2x2 houses near roads provided there is enough space.
+![House Big Place Screen](https://user-images.githubusercontent.com/65532299/157320898-b73c5a86-6e2d-40b1-803a-675cb825fb69.png)
+
+Spawning Agents (Pedestrians):
+By clicking the spawn agents button in the top right corner you can spawn agents(pedestrians) at all buildings.
+![Spawn Agents Screen](https://user-images.githubusercontent.com/65532299/157321167-ba08ce4e-1a7a-4fe5-8dc3-e1101d080e3f.png)
+
+Spawning Cars:
+By clicking the spawn cars button in the top right corner you can spawn cars at all buildings.
+![Spawn Car Screen](https://user-images.githubusercontent.com/65532299/157321320-2f65c43e-b1c8-4d40-92f9-d73ed97286c7.png)
+
+Intersections:
+Cars and pedestrians will interact at intersections and pedestrians will take priority over cars
+![Intersection Screen](https://user-images.githubusercontent.com/65532299/157321500-eee07c0f-8d02-4ed8-b2e6-315730f1faeb.png)
+
+
+
 
 Time Sheet:
 Project Received on the 22 Feb 2022
