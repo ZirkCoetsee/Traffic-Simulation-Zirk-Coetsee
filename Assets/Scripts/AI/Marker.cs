@@ -25,17 +25,17 @@ public class Marker : MonoBehaviour
     //Debug to draw the connections between markers 
     private void OnDrawGizmos() 
     {
-        if(Selection.activeObject == gameObject)
-        {
-            Gizmos.color = Color.red;
-            if(adjacentMarkers.Count > 0)
-            {
-                foreach (var item in adjacentMarkers)
-                {
-                    Gizmos.DrawLine(transform.position, item.Position);
-                }
-            }
-            Gizmos.color = Color.white;
-        }
+        // if(Selection.activeObject == gameObject)
+        // {
+        //     Gizmos.color = Color.red;
+        //     if(adjacentMarkers.Count > 0)
+        //     {
+        //         foreach (var item in adjacentMarkers)
+        //         {
+        //             Gizmos.DrawLine(transform.position, item.Position);
+        //         }
+        //     }
+        //     Gizmos.color = Color.white;
+        // }
     }
 }
